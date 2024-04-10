@@ -2,12 +2,12 @@ import os
 import shutil
 
 # 设置你的CSV文件所在的目录和目标目录的根路径
-source_directory = 'D:\\Desktop\\BUPT\\Final Project\\Otras descargas Datos\\spo2'
-target_root_directory = 'D:\\Desktop\\BUPT\\Final Project\\Otras descargas Datos\\spo2\\fileAfterClassify'
+source_directory = 'D:\\Desktop\\BUPT\\Final Project\\Otras descargas Datos\\nirs'
+target_root_directory = 'D:\\Desktop\\BUPT\\Final Project\\Otras descargas Datos\\nirs\\fileAfterClassify'
 
 # 遍历source_directory中的所有文件
 for filename in os.listdir(source_directory):
-    if filename.startswith('prem') and filename.endswith('.csv'):
+    if filename.startswith('prem') and filename.endswith('.xlsx'):
         # 分析文件名以找到编号
         parts = filename.split('_')
         prem_number = parts[1]
