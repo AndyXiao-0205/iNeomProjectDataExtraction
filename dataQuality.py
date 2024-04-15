@@ -6,7 +6,9 @@ def try_parse_datetime(date_time_str):
     date_formats = [
         '%b. %d. %Y %H:%M:%S',
         '%m/%d/%Y %H:%M:%S',
+        '%Y/%m/%d %H:%M:%S',
         '%b.%d.%Y %H:%M:%S',
+        '%d-%b-%Y %H:%M:%S'
     ]
     for date_format in date_formats:
         try:
@@ -15,10 +17,17 @@ def try_parse_datetime(date_time_str):
             continue
     return pd.NaT
 
+def clean_and_convert_to_numeric(data, column_index, min_value):
+    # 将SpO2列中的非数字字符替换并尝试转换为数值，错误转换为NaN
+    data.iloc[:, column_index] = pd.to_numeric(data.iloc[:, column_index], errors='coerce')
+    # 过滤掉SpO2值小于设定的最小值的记录
+    data = data[data.iloc[:, column_index] > min_value]
+    return data
+
 def calculate_metrics_and_intervals(data, bed_number):
     # 将SpO2值转换为数值，并移除NaN值
     spo2_column_index = 3
-    data.iloc[:, spo2_column_index] = pd.to_numeric(data.iloc[:, spo2_column_index], errors='coerce')
+    data = clean_and_convert_to_numeric(data, spo2_column_index, 20)
     valid_data = data.dropna(subset=[spo2_column_index, 'Datetime'])
 
     results = []
@@ -76,6 +85,6 @@ def process_and_output(file_path, output_path):
     append_to_excel(output_path, intervals_df, 'Intervals')
 
 # 示例用法
-file_path = 'D:\\Desktop\\BUPT\\Final Project\\Otras descargas Datos\\spo2\\fileAfterClassify\\prem_41.csv'
-output_path = 'D:\\Desktop\\BUPT\\Final Project\\Otras descargas Datos\\spo2\\fileAfterClassify\\output_41.xlsx'
+file_path = 'D:\\Desktop\\BUPT\\Final Project\\Otras descargas Datos\\spo2\\fileAfterClassify\\prem_99.csv'
+output_path = 'D:\\Desktop\\BUPT\\Final Project\\Otras descargas Datos\\spo2\\fileAfterClassify\\output_99.xlsx'
 process_and_output(file_path, output_path)
