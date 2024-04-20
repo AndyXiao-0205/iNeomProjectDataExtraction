@@ -56,8 +56,8 @@ def process_csv(file_path, output_path):
     with pd.ExcelWriter(output_path, mode='a', engine='openpyxl', if_sheet_exists='overlay',) as writer:
         df.to_excel(writer, index=False, header=False,sheet_name='Data', startrow=writer.sheets['Data'].max_row if 'Data' in writer.book.sheetnames else 0)
 
-def process_folder(folder_path, output_path, start_from=2):
-    pattern = re.compile(r'prem_(\d+)\.csv')
+def process_folder(folder_path, output_path, start_from=104):
+    pattern = re.compile(r'cleaned_cleaned_prem_(\d+)\.csv')
     files = sorted(
         (f for f in os.listdir(folder_path) if pattern.match(f)),
         key=lambda x: int(pattern.search(x).group(1))
@@ -71,5 +71,5 @@ def process_folder(folder_path, output_path, start_from=2):
 
 # Define folder path and output path
 folder_path = 'D:\\Desktop\\BUPT\\Final Project\\Otras descargas Datos\\spo2\\fileAfterClassify'  # Replace with the path to your folder
-output_path = 'D:\\Desktop\\BUPT\\Final Project\\Otras descargas Datos\\spo2\\fileAfterClassify\\outcome.xlsx'  # Output Excel file
+output_path = 'D:\\Desktop\\BUPT\\Final Project\\Otras descargas Datos\\spo2\\fileAfterClassify\\outcome_94.xlsx'  # Output Excel file
 process_folder(folder_path, output_path)

@@ -26,7 +26,7 @@ def merging_without_headers(csv_list, outputfile):
     print(f'完成合并: {outputfile}')
 
 if __name__ == '__main__':
-    root_directory = 'D:\\Desktop\\BUPT\\Final Project\\Otras descargas Datos\\spo2\\fileAfterClassify\\noHeader'  # 修改为你的CSV文件所在的根目录路径
+    root_directory = 'D:\\Desktop\\BUPT\\Final Project\\Otras descargas Datos\\spo2\\fileAfterClassify\\noHeader\\prem_64'  # 修改为你的CSV文件所在的根目录路径
 
     # 遍历根目录下的每个子目录
     for subdir, dirs, files in os.walk(root_directory):

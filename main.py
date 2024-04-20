@@ -2,9 +2,11 @@ import pandas as pd
 
 def try_parse_datetime(date_time_str):
     date_formats = [
-        '%b. %d. %Y %H:%M:%S',  # "Jan. 1. 2020 12:00:00"
-        '%m/%d/%Y %H:%M:%S',    # "12/25/2020 12:00:00"
-        '%b.%d.%Y %H:%M:%S',  # "Jan. 1. 2020 12:00:00"
+        '%b. %d. %Y %H:%M:%S',
+        '%m/%d/%Y %H:%M:%S',
+        '%Y/%m/%d %H:%M:%S',
+        '%b.%d.%Y %H:%M:%S',
+        '%d-%b-%Y %H:%M:%S'
     ]
     for date_format in date_formats:
         try:
